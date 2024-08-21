@@ -6,11 +6,13 @@ public class Player : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] public static int playerHealth = 5;
-    [SerializeField] public static int playerAmmo = 10; 
+    [SerializeField] public static int playerAmmo = 10;
     public static int playerPoints = 0;
     public static int multiplier = 1;
     public static int playerKillStreak;
     public static int playerLives = 1;
+    public static int playerAmmoCapacity = 25;
+    public static int playerPulseCapacity = 1;
     public float bulletVelocity = 5f;
     public GameObject bullet;
     public GameObject bullet1;
@@ -42,13 +44,16 @@ public class Player : MonoBehaviour
 
         if (Input.GetButtonDown("Fire1") && playerAmmo > 0)
         {
-            Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector2 direction = (Vector2)((worldMousePos - transform.position));
-            direction.Normalize();
-            GameObject bullet = (GameObject)Instantiate(bullet1, transform.position + (Vector3)(direction * 0.5f), Quaternion.identity);
-            bullet.GetComponent<Rigidbody2D>().velocity = direction * bulletVelocity;
-            bullet.name = "Bullet";
-            playerAmmo -= 1;
+            for (int i = 0; i < GameMain.bulletCount; i++)
+            {
+                Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                Vector2 direction = (Vector2)((worldMousePos - transform.position));
+                direction.Normalize();
+                GameObject bullet = (GameObject)Instantiate(bullet1, transform.position + (Vector3)(direction * 0.5f), Quaternion.identity);
+                bullet.GetComponent<Rigidbody2D>().velocity = direction * bulletVelocity;
+                bullet.name = "Bullet";
+                playerAmmo -= 1;
+            }
         }
 
         if (playerHealth < 1 && playerLives == 0)
@@ -74,4 +79,5 @@ public class Player : MonoBehaviour
         // screen goes black
         // display message
     }
+
 }

@@ -6,7 +6,7 @@ public class Bullet : MonoBehaviour
 {
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.collider.tag == "Enemy")
+        if (col.collider.tag == "Enemy" && !GameMain.piercingBullets)
         {
             Destroy(this.gameObject);
         }

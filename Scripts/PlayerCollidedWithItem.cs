@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCollidedWithItem : MonoBehaviour
+public class HitRandomizer : MonoBehaviour
 {
     public GameObject player;
 
@@ -10,6 +10,7 @@ public class PlayerCollidedWithItem : MonoBehaviour
     {
         if (col.gameObject.name == "Player")
         {
+            Debug.Log("Randomizer Activated");
             GameMain.Randomizer();
         }        
     }

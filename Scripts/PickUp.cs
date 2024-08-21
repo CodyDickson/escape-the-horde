@@ -21,7 +21,7 @@ public class PickUp : MonoBehaviour
         if (!isActive)
         {
             timer += Time.deltaTime;
-            if (timer > 10)
+            if (timer > 5)
             {
                 isActive = true;
                 spriteRenderer.enabled = true;
@@ -49,8 +49,12 @@ public class PickUp : MonoBehaviour
 
     void AmmoPickUp()
     {
-        Debug.Log("Total Ammo: " + Player.playerAmmo);
         Player.playerAmmo += 5;
+        if (Player.playerAmmo > 25)
+        {
+            Player.playerAmmo = 25;
+        }
+        Debug.Log("Total Ammo: " + Player.playerAmmo);
     }
 
     void PowerPickUp()
@@ -69,5 +73,12 @@ public class PickUp : MonoBehaviour
         {
             Debug.Log("Third Power Up");
         }
+    }
+
+    void BoostPickup()
+    {
+        // increase ammo capacity
+        // increase pulse capacity
+        // 
     }
 }
